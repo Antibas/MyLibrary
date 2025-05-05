@@ -1,0 +1,133 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mylib.util.list;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+import mylib.math.Math2;
+import mylib.util.ArrayUtils;
+import mylib.util.Methods;
+
+/**
+ *
+ * @author User
+ */
+public class RandomArrayList<E> extends ArrayListIndexConvertor<E> {
+    
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1239168756052538810L;
+
+	public RandomArrayList(){
+        super();
+    }
+    
+    public RandomArrayList(Collection<? extends E> c) {
+		super(c);
+	}
+
+	public RandomArrayList(int initialCapacity) {
+		super(initialCapacity);
+	}
+
+	@Override
+	public int indexConvert(int index) {
+		return Math2.RNG(0, this.size()-1, index*1000);
+	}
+
+	/*@Override
+	public int indexOf(Object o) {
+		return this.indexConvert(0);
+	}
+
+	@Override
+	public int lastIndexOf(Object o) {
+		return this.indexConvert(0);
+	}
+
+	@Override
+	public E get(int index) {
+		return super.get(this.indexConvert(index));
+	}
+
+	@Override
+	public E set(int index, E element) {
+		return super.set(this.indexConvert(index), element);
+	}
+
+	@Override
+	public E remove(int index) {
+		return super.remove(this.indexConvert(index));
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		return super.remove(o);
+	}
+
+	@Override
+	protected void removeRange(int fromIndex, int toIndex) {
+		super.removeRange(this.indexConvert(fromIndex), this.indexConvert(toIndex));
+	}
+
+	@Override
+	public ListIterator<E> listIterator(int index) {
+		return super.listIterator(this.indexConvert(index));
+	}
+
+	@Override
+	public List<E> subList(int fromIndex, int toIndex) {
+		return super.subList(this.indexConvert(fromIndex), this.indexConvert(toIndex));
+	}*/
+	
+	
+	
+	@Override
+	public Iterator<E> iterator() {
+		Iterator<E> it = new Iterator<E>() {
+
+            private int[] indexSet = Math2.range(0, size());
+            private boolean[] indices = ArrayUtils.falses(indexSet.length);
+            
+            @Override
+            public boolean hasNext() {
+            	return Methods.and(indices);//!(currentIndexR == rows-1 && currentIndexC == columns); //);//currentIndexR < rows;
+            }
+
+            @Override
+            public E next() {
+            	int index;
+            	do{
+            		index = Math2.choice(indexSet);
+            	} while(indices[index]);
+            	indices[index] = true;
+				return RandomArrayList.this.get(index);
+
+            }
+
+            @Override
+            public void remove() {
+            	RandomArrayList.this.remove(this.next());
+                //throw new UnsupportedOperationException();
+            }
+        };
+        return it;
+	}
+
+	/*@Override
+	public String toString() {
+		String s = "";
+		Iterator<E> it = this.iterator();
+		while(it.hasNext()) {
+			
+		}
+		return s;
+	}*/
+	
+	
+}
