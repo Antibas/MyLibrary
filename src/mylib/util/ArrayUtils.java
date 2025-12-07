@@ -3,6 +3,7 @@ package mylib.util;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Vector;
 import java.util.function.Function;
 
@@ -313,7 +314,7 @@ public final class ArrayUtils {
 	}
 	
 	public static <T> Vector<Integer> find(T[] a) {
-		return ArrayUtils.find(a, aa -> aa == null);
+		return ArrayUtils.find(a, Objects::isNull);
 	}
 	
 	public static <T> Vector<Integer> find(Iterable<? extends T> a, Function<T, Boolean> cond) {
@@ -332,14 +333,14 @@ public final class ArrayUtils {
 	}
 	
 	public static <T> Vector<Integer> find(Iterable<? extends T> a) {
-		return ArrayUtils.find(a, aa -> aa == null);
+		return ArrayUtils.find(a, Objects::isNull);
 	}
 	
 	public static Vector<Boolean> where(double[] a, Function<Double, Boolean> cond) {
 		Vector<Boolean> indices = new Vector<>();
-		for(int i = 0; i < a.length; i++) {
-			indices.add(cond.apply(a[i]));
-		}
+        for (double v : a) {
+            indices.add(cond.apply(v));
+        }
 		return indices;
 	}
 	
@@ -349,9 +350,9 @@ public final class ArrayUtils {
 	
 	public static Vector<Boolean> where(int[] a, Function<Integer, Boolean> cond) {
 		Vector<Boolean> indices = new Vector<>();
-		for(int i = 0; i < a.length; i++) {
-			indices.add(cond.apply(a[i]));
-		}
+        for (int j : a) {
+            indices.add(cond.apply(j));
+        }
 		return indices;
 	}
 	
@@ -361,28 +362,27 @@ public final class ArrayUtils {
 	
 	public static <T> Vector<Boolean> where(T[] a, Function<T, Boolean> cond) {
 		Vector<Boolean> indices = new Vector<>();
-		for(int i = 0; i < a.length; i++) {
-			indices.add(cond.apply(a[i]));
-		}
+        for (T t : a) {
+            indices.add(cond.apply(t));
+        }
 		return indices;
 	}
 	
 	public static <T> Vector<Boolean> where(T[] a) {
-		return ArrayUtils.where(a, aa -> aa == null);
+		return ArrayUtils.where(a, Objects::isNull);
 	}
 	
 	public static <T> Vector<Boolean> where(Iterable<? extends T> a, Function<T, Boolean> cond) {
 		Vector<Boolean> indices = new Vector<>();
-		Iterator<? extends T> iter = a.iterator();
-		while(iter.hasNext()) {
-			indices.add(cond.apply(iter.next()));
-		}
+        for (T t : a) {
+            indices.add(cond.apply(t));
+        }
 		
 		return indices;
 	}
 	
 	public static <T> Vector<Boolean> where(Iterable<? extends T> a) {
-		return ArrayUtils.where(a, aa -> aa == null);
+		return ArrayUtils.where(a, Objects::isNull);
 	}
 	
 	public static <T> T[] reverse(T[] arr, Class<T> cl) {
@@ -441,7 +441,7 @@ public final class ArrayUtils {
 	}
 	
 	public static Pair<Vector<Integer>, Vector<Integer>> arraySplit(int[] arr){
-		return arraySplit(arr, (int)(Math.ceil(arr.length/2)));
+		return arraySplit(arr, (int)(Math.ceil((double) arr.length /2)));
 	}
 	
 	public static int[] byIndex(int[] a, Collection<? extends Integer> indices) {

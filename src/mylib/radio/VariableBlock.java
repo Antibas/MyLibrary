@@ -1,9 +1,12 @@
 package mylib.radio;
 
+import java.io.Serial;
+
 public class VariableBlock<T> extends RadioBlock {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -3441021488681458981L;
 	private T value;
 	

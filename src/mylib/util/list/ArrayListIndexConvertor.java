@@ -1,5 +1,6 @@
 package mylib.util.list;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +11,7 @@ public abstract class ArrayListIndexConvertor<T> extends ArrayList<T> implements
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -7547462208936406770L;
 
 	public ArrayListIndexConvertor() {

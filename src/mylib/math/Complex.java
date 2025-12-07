@@ -1,8 +1,14 @@
 package mylib.math;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 
+@Setter
+@Getter
 public final class Complex extends Number2 implements Comparator<Complex>, Comparable<Complex>, Serializable{
 	public static final Complex MAX_VALUE = new Complex(Double.MAX_VALUE, Double.MAX_VALUE);
 	public static final Complex MIN_VALUE = new Complex(Double.MIN_VALUE, Double.MIN_VALUE);
@@ -16,13 +22,14 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -99721705343218094L;
 	
-	private double real, imag;
+	private double real, imaginary;
 
-	public Complex(double real, double imag) {
+	public Complex(double real, double imaginary) {
 		this.real = real;
-		this.imag = imag;
+		this.imaginary = imaginary;
 	}
 	
 	public Complex(double real) {
@@ -34,45 +41,27 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	}
 	
 	public Complex(Complex c) {
-		this(c.real, c.imag);	
+		this(c.real, c.imaginary);
 	}
 	
 	public Complex(String value) {
 		this(Complex.parseComplex(value));	
 	}
 
-	public double getReal() {
-		return real;
-	}
-
-	public void setReal(double real) {
-		this.real = real;
-	}
-
-	public double getImaginary() {
-		return imag;
-	}
-
-	public void setImaginary(double imag) {
-		this.imag = imag;
-	}
-	
 	public double getAmplitude() {
-		return Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imag, 2));
+		return Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imaginary, 2));
 	}
 
 	public double getAngle() {
-		return Math.atan(this.imag / this.real);
+		return Math.atan(this.imaginary / this.real);
 	}
 
-
-	
 	public Complex add(double d) {
-		return new Complex(real + d, imag);
+		return new Complex(real + d, imaginary);
 	}
 	
 	public Complex add(Complex c) {
-		return new Complex(real + c.real, imag + c.imag);
+		return new Complex(real + c.real, imaginary + c.imaginary);
 	}
 	
 	@Override
@@ -83,28 +72,28 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 		return this.add(o.complexValue());
 	}
 
-	public Complex substract(double d) {
-		return new Complex(real - d, imag);
+	public Complex subtract(double d) {
+		return new Complex(real - d, imaginary);
 	}
 	
-	public Complex substract(Complex c) {
-		return new Complex(real - c.real, imag - c.imag);
+	public Complex subtract(Complex c) {
+		return new Complex(real - c.real, imaginary - c.imaginary);
 	}
 	
 	@Override
-	public Complex substract(Number2 o) {
+	public Complex subtract(Number2 o) {
 		if(o.complexValue() == null) {
-			return this.substract(o.doubleValue());
+			return this.subtract(o.doubleValue());
 		}
-		return this.substract(o.complexValue());
+		return this.subtract(o.complexValue());
 	}
 
 	public Complex multiply(double d) {
-		return new Complex(real * d, imag * d);
+		return new Complex(real * d, imaginary * d);
 	}
 	
 	public Complex multiply(Complex com) {
-		double a = real, b = imag, c = com.real, d = com.imag;
+		double a = real, b = imaginary, c = com.real, d = com.imaginary;
 		return new Complex(a*c - b*d, a*d + b*c);
 	}
 	
@@ -118,11 +107,11 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	public Complex divide(double d) {
 		if(d == 0) throw new ArithmeticException("Division by zero.");
-		return new Complex(real / d, imag / d);
+		return new Complex(real / d, imaginary / d);
 	}
 	
 	public Complex divide(Complex com) {
-		double a = real, b = imag, c = com.real, d = com.imag;
+		double a = real, b = imaginary, c = com.real, d = com.imaginary;
 		double e = Math.pow(c, 2) - Math.pow(d, 2);
 		if(e == 0.0) {
 			return (new Complex(a*c + b*d, b*c - a*d)).multiply(Double.POSITIVE_INFINITY);
@@ -140,12 +129,12 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	@Override
 	public Complex invert() {
-		double a = real, b = imag;
+		double a = real, b = imaginary;
 		return (new Complex(a, -b)).divide(Math.pow(a, 2) - Math.pow(b, 2));
 	}
 	
 	public Complex conjugate() {
-		return new Complex(real, -imag);
+		return new Complex(real, -imaginary);
 	}
 	
 	public Complex pow(int p) {
@@ -157,8 +146,8 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	
 	@Override
 	public String toString() {
-		if(imag >= 0.0d) return real + "+" + imag + "j";
-		return real + "-" + Math.abs(imag) + "j";
+		if(imaginary >= 0.0d) return real + "+" + imaginary + "j";
+		return real + "-" + Math.abs(imaginary) + "j";
 	}
 	
 	public String toPolarString() {
@@ -170,7 +159,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(imag);
+		temp = Double.doubleToLongBits(imaginary);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(real);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -179,7 +168,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	@Override
 	public int compareTo(Complex o) {
-		return ((Double)(real)).compareTo(o.real) + ((Double)(imag)).compareTo(o.imag);
+		return ((Double)(real)).compareTo(o.real) + ((Double)(imaginary)).compareTo(o.imaginary);
 	}
 
 	@Override
@@ -209,34 +198,34 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	@Override
 	public boolean greaterThan(Number2 o) {
-		return this.real > o.complexValue().real && this.imag > o.complexValue().imag;
+		return this.real > o.complexValue().real && this.imaginary > o.complexValue().imaginary;
 	}
 
 	@Override
 	public boolean greaterThanOrEqual(Number2 o) {
-		return this.real >= o.complexValue().real && this.imag >= o.complexValue().imag;
+		return this.real >= o.complexValue().real && this.imaginary >= o.complexValue().imaginary;
 	}
 
 	@Override
 	public boolean lessThan(Number2 o) {
-		return this.real < o.complexValue().real && this.imag < o.complexValue().imag;
+		return this.real < o.complexValue().real && this.imaginary < o.complexValue().imaginary;
 	}
 
 	@Override
 	public boolean lessThanOrEqual(Number2 o) {
-		return this.real <= o.complexValue().real && this.imag <= o.complexValue().imag;
+		return this.real <= o.complexValue().real && this.imaginary <= o.complexValue().imaginary;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Complex) {
 			Complex c = (Complex)obj;
-			return this.real == c.real && this.imag == c.imag;
+			return this.real == c.real && this.imaginary == c.imaginary;
 		}
 		
 		if(obj instanceof Double || obj instanceof Integer) {
 			Double d = (Double)obj;
-			return this.real == d && this.imag == 0.0d;
+			return this.real == d && this.imaginary == 0.0d;
 		}
 		
 		return false;
@@ -311,7 +300,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	@Override
 	public boolean isInfinite() {
 		return this.real == Double.POSITIVE_INFINITY || this.real == Double.NEGATIVE_INFINITY ||
-			   this.imag == Double.POSITIVE_INFINITY || this.imag == Double.NEGATIVE_INFINITY;
+			   this.imaginary == Double.POSITIVE_INFINITY || this.imaginary == Double.NEGATIVE_INFINITY;
 	}
 
 	@Override

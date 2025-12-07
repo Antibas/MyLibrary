@@ -1,5 +1,6 @@
 package mylib.util.itemset;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ public class ItemSet extends HashSet<Item>{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -3620119176387505062L;
 	
 	public ItemSet() {
@@ -59,7 +61,7 @@ public class ItemSet extends HashSet<Item>{
 	}
 	
 	public double knapsack01(int weight) {
-		double[] A = ArrayUtils.zerosDouble(weight), B = ArrayUtils.zerosDouble(weight);
+		double[] A, B = ArrayUtils.zerosDouble(weight);
 		for(Item i: this) {
 			A = B.clone();
 			for(int w = (int)i.getWeight(); w < weight; w++) {

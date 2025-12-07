@@ -27,10 +27,7 @@ public class Cos extends Sin {
 
 	@Override
 	public Double apply(Double t) {
-		if(phaseModifier == RADIANS) {
-			return amplitude*Math.cos(frequency*t + phase)+adder;
-		}
-		return amplitude*Math.cos(frequency*t + Math2.PI*phase/180.0d)+adder;
+		return amplitude*Math.cos(frequency*t + this.getPhase())+adder;
 	}
 	
 	@Override

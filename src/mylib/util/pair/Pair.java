@@ -1,11 +1,18 @@
 package mylib.util.pair;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
 import java.io.Serializable;
 
+@Setter
+@Getter
 public class Pair<V1, V2> implements Serializable{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -6282508785273402085L;
 	protected V1 first;
 	protected V2 second;
@@ -14,24 +21,8 @@ public class Pair<V1, V2> implements Serializable{
 		this.first = first;
 		this.second = second;
 	}
-	
-	public V1 getFirst() {
-		return first;
-	}
 
-	public void setFirst(V1 first) {
-		this.first = first;
-	}
-
-	public V2 getSecond() {
-		return second;
-	}
-
-	public void setSecond(V2 second) {
-		this.second = second;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

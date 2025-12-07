@@ -8,6 +8,7 @@ package mylib.math.function.polynomial;
 import java.util.Arrays;
 import java.util.Vector;
 
+import lombok.Getter;
 import mylib.math.function.FunctionClass;
 import mylib.util.ArrayUtils;
 
@@ -17,6 +18,7 @@ import mylib.util.ArrayUtils;
  */
 public class Polynomial extends FunctionClass{
     protected double[] multiples;
+    @Getter
     protected int power;
     
     public Polynomial(double... m){
@@ -57,10 +59,6 @@ public class Polynomial extends FunctionClass{
 		}
 	}
 
-	public int getPower(){
-        return power;
-    }
-	
     public void setMultiples(double... m) {
 		this.multiples = m;
 		this.power = m.length - 1;

@@ -1,8 +1,12 @@
 package mylib.math.function.logarithmic;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.Number2;
 import mylib.math.function.FunctionClass;
 
+@Setter
+@Getter
 public class Log extends FunctionClass{
 	protected double base;
 	
@@ -20,15 +24,7 @@ public class Log extends FunctionClass{
 		this(base, 1.0d, 0.0d);
 	}
 
-	public double getBase() {
-		return base;
-	}
-
-	public void setBase(double base) {
-		this.base = base;
-	}
-	
-	@Override
+    @Override
 	public Double apply(Double t) {
 		return amplitude*Math.log10(t)/Math.log10(base) + adder;
 	}

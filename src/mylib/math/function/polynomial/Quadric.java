@@ -26,7 +26,7 @@ public class Quadric extends Polynomial{
     @Override
     public Complex[] solveForZero(){
     	double D;
-        Complex s[] = new Complex[2];
+        Complex[] s = new Complex[2];
         
         D = discr();
         System.out.println(2.0 * getMultiple(2));

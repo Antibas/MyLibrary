@@ -1,14 +1,19 @@
 package mylib.util.list;
 
+import lombok.Getter;
+
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
+@Getter
 public class ConditionArrayList<T> extends ArrayList<T> {
 
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -5303022406052170453L;
 
 	private Function<T ,Boolean> condition;
@@ -86,11 +91,7 @@ public class ConditionArrayList<T> extends ArrayList<T> {
 		return super.addAll(index, c) && !removeIfNotCondition();
 	}
 
-	public Function<T, Boolean> getCondition() {
-		return condition;
-	}
-
-	public void setCondition(Function<T, Boolean> condition) {
+    public void setCondition(Function<T, Boolean> condition) {
 		this.condition = condition;
 		removeIfNotCondition();
 	}

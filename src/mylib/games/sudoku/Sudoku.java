@@ -6,11 +6,13 @@ import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.Vector;
 
+import lombok.Getter;
 import mylib.math.Math2;
 import mylib.math.matrix.Matrix;
 import mylib.util.Methods;
 import mylib.util.pair.Pair;
 
+@Getter
 public class Sudoku {
 	private final Matrix grid;
 	
@@ -78,9 +80,10 @@ public class Sudoku {
 		int number;
 		for(int i = 0; i < this.size(); i++) {
         	for(int j = 0; j < this.size(); j++) {
-        		do {
-        			number = Math2.RNG(0, this.size());
-        		} while(!this.putIfPossible(i, j, number));
+//        		do {
+//        			number = Math2.RNG(0, this.size());
+//        		} while(!this.putIfPossible(i, j, number));
+				this.randomizeBlock(i, j);
         	}
 		}
 		
@@ -94,8 +97,13 @@ public class Sudoku {
 	}
 	
 	public boolean put(int x, int y, int n) {
-		this.grid.set(x, y, n);
-		return true;
+		try {
+			this.grid.set(x, y, n);
+			return true;
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
 	}
 	
 	public boolean putIfPossible(int x, int y, int n) {
@@ -108,12 +116,8 @@ public class Sudoku {
 	public int get(int x, int y) {
 		return (int) this.grid.elementAt(x, y);
 	}
-	
-	public Matrix getGrid() {
-		return grid;
-	}
 
-	public HashMap<Pair<Integer, Integer>, Stack<Integer>> getPossibilities() {
+    public HashMap<Pair<Integer, Integer>, Stack<Integer>> getPossibilities() {
 		HashMap<Pair<Integer, Integer>, Stack<Integer>> possibilities = new HashMap<>();
 		for(int i = 0; i < this.size(); i++) {
         	for(int j = 0; j < this.size(); j++) {
@@ -135,7 +139,7 @@ public class Sudoku {
 	}
 	
 	public Stack<Integer> getPossibilities(int x, int y){
-		int n = (int) this.get(x, y);
+		int n = this.get(x, y);
 		Stack<Integer> possibles = new Stack<>();
 		if(n > 0) {
 			return possibles;
@@ -222,34 +226,36 @@ public class Sudoku {
 	}
 	
 	public int emptyBlocks() {
-		int S = 0;
-		for(int i = 0; i < this.size(); i++) {
-        	for(int j = 0; j < this.size(); j++) {
-        		int n = (int) this.get(i, j);
-        		if(n == 0) {
-        			S++;
-        		}
-        	}
-		}
-		return S;
+//		int S = 0;
+//		for(int i = 0; i < this.size(); i++) {
+//        	for(int j = 0; j < this.size(); j++) {
+//        		int n = this.get(i, j);
+//        		if(n == 0) {
+//        			S++;
+//        		}
+//        	}
+//		}
+//		return S;
+		return this.grid.stream().map(s -> s==0?1:0).reduce(0, Integer::sum);
 	}
 	
 	public boolean isFull() {
-		for(int i = 0; i < this.size(); i++) {
-        	for(int j = 0; j < this.size(); j++) {
-        		int n = (int) this.get(i, j);
-        		if(n == 0) {
-        			return false;
-        		}
-        	}
-		}
-		return true;
+//		for(int i = 0; i < this.size(); i++) {
+//        	for(int j = 0; j < this.size(); j++) {
+//        		int n = this.get(i, j);
+//        		if(n == 0) {
+//        			return false;
+//        		}
+//        	}
+//		}
+//		return true;
+		return this.grid.stream().allMatch(s -> s!=0);
 	}
 	
 	public boolean isValid() {
 		for(int i = 0; i < this.size(); i++) {
         	for(int j = 0; j < this.size(); j++) {
-        		int n = (int) this.get(i, j);
+        		int n = this.get(i, j);
         		if(n == 0) {
         			continue;
         		}

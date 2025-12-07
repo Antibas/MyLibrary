@@ -5,6 +5,7 @@
  */
 package mylib.util.list;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
@@ -17,6 +18,7 @@ public class CircularArrayList<T> extends ArrayListIndexConvertor<T> {
     /**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 2964387097130036226L;
 
 	public CircularArrayList(){

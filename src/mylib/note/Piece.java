@@ -1,7 +1,9 @@
 package mylib.note;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Piece extends ArrayList<Note>{
@@ -9,6 +11,7 @@ public class Piece extends ArrayList<Note>{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -470419647627169985L;
 
 	public Piece() {
@@ -17,8 +20,7 @@ public class Piece extends ArrayList<Note>{
 
 	public Piece(Note...notes) {
 		super();
-		for(Note note: notes)
-			this.add(note);
+        Collections.addAll(this, notes);
 	}
 	
 	public Piece(Collection<? extends Note> c) {

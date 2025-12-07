@@ -1,5 +1,6 @@
 package mylib.util.graph;
 
+import java.io.Serial;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,7 @@ public class DirectedAdjacencyGraph<V extends Vertex, E extends DirectedEdge> ex
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -5503984591246792910L;
 
 	public DirectedAdjacencyGraph() {

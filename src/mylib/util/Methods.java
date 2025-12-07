@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,10 +29,10 @@ public final class Methods {
 	return Arrays.copyOfRange(array, beg, end + 1);
     }
     
-    public static File downloadFromYoutube(String address, String name) throws MalformedURLException, IOException {
+    public static File downloadFromYoutube(String address, String name) throws IOException, URISyntaxException {
         File f = new File(name);
-        URL url = new URL(address);
-        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+        URL url = new URI(address).toURL();//new URL(address);
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
         BufferedWriter out = new BufferedWriter(new FileWriter(f));
         int c = in.read();
         while (c != -1) {
@@ -103,7 +104,7 @@ public final class Methods {
      * @return 
      * @throws IllegalAccessException
      */
-    public static String variableName(Object variable, Class c) throws IllegalAccessException{
+    public static String variableName(Object variable, Class<?> c) throws IllegalAccessException{
         Field[] fields = c.getFields();
         
         for(Field field: fields){
@@ -112,7 +113,7 @@ public final class Methods {
         return null;
     }
     
-    public static int sum(int a, int b, int array[]){
+    public static int sum(int a, int b, int[] array){
         if(a >= b || a < 0 || b > array.length-1) throw new IllegalArgumentException();
         int S = 0;
         for(int i = a; i <= b; i++)
@@ -120,16 +121,16 @@ public final class Methods {
         return S;
     }
     
-    public static int sum(int array[]){
+    public static int sum(int[] array){
         return sum(0, array.length-1, array);
     }
     
-    public static String arrayAsText(String a[]){
-        String ret = "";
+    public static String arrayAsText(String[] a){
+        StringBuilder ret = new StringBuilder();
         for(String s: a){
-            ret += s + " ";
+            ret.append(s).append(" ");
         }
-        return ret;
+        return ret.toString();
     }
     
     public static Vector<Integer> findAllIndexesOf(String string, String substring){
@@ -143,11 +144,9 @@ public final class Methods {
         return indexes;
     }
     
-    public static <T> Set<T> arrayToSet(T array[]) { 
-        Set<T> set = new HashSet<>(); 
-        for (T t : array) { 
-            set.add(t); 
-        } 
+    public static <T> Set<T> arrayToSet(T[] array) {
+        Set<T> set = new HashSet<>();
+        Collections.addAll(set, array);
         return set; 
     }
     

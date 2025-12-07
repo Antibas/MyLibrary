@@ -1,7 +1,11 @@
 package mylib.math.function.other;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.function.FunctionClass;
 
+@Setter
+@Getter
 public class D extends FunctionClass{
 	protected double t0;
 
@@ -21,19 +25,10 @@ public class D extends FunctionClass{
 	public D() {
 		this(0.0d, 1.0d, 0.0d);
 	}
-	
-	public double getT0() {
-		return t0;
-	}
 
-	public void setT0(double t0) {
-		this.t0 = t0;
-	}
-
-	@Override
+    @Override
 	public Double apply(Double t) {
-		double p = (t == t0)? 1.0d : 0.0d;
-		return amplitude*p + adder;
+		return amplitude*((t == t0)? 1.0d : 0.0d) + adder;
 	}
 	
 	@Override

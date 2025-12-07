@@ -23,7 +23,7 @@ public abstract class Number2 extends Number implements Serializable{
 	public abstract Complex complexValue();
 	
 	public abstract Number add(Number2 o);
-	public abstract Number substract(Number2 o);
+	public abstract Number subtract(Number2 o);
 	public abstract Number multiply(Number2 o);
 	public abstract Number divide(Number2 o) throws ArithmeticException;
 	public abstract Number invert();

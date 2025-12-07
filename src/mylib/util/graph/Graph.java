@@ -126,7 +126,7 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	static <V extends Vertex, E extends Edge> Graph<V, E> depthFirstSearch(Graph<V, E> graph, String vertex) {
 		
 		if(!graph.hasVertex(vertex)) {
-			throw new IllegalArgumentException(vertex.toString());
+			throw new IllegalArgumentException(vertex);
 		}
 		//graph.reset();
 		//graph.getVertex(vertex).setExplored(true);
@@ -181,7 +181,7 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 		
 		graph.setExploredVertex(vertex, true);
 		lists.add(new ArrayList<>());
-		lists.get(0).add(graph.getVertex(vertex));
+		lists.getFirst().add(graph.getVertex(vertex));
 		
 		int list_p = 0;
 		while(!lists.get(list_p).isEmpty()) {
@@ -211,8 +211,8 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 		graph.setExploredVertex(vertex, true);
 		vertices.add(vertex);
 		lists.add(new ArrayList<>());
-		lists.get(0).add(graph.getVertex(vertex));
-		
+		lists.getFirst().add(graph.getVertex(vertex));
+
 		int list_p = 0;
 		while(!lists.get(list_p).isEmpty()) {
 			lists.add(new ArrayList<>());

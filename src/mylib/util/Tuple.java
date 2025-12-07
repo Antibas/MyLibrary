@@ -1,11 +1,12 @@
 package mylib.util;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Vector;
 
 public class Tuple<T> implements Collection<T>{
-	private Vector<T> items;
+	private final Vector<T> items;
 	
 	public Tuple() {
 		items = new Vector<>();
@@ -13,9 +14,7 @@ public class Tuple<T> implements Collection<T>{
 	
 	public Tuple(T...ts) {
 		items = new Vector<>();
-		for(T t: ts) {
-			items.add(t);
-		}
+        Collections.addAll(items, ts);
 	}
 	
 	public Tuple(Collection<? extends T> c) {
@@ -70,14 +69,14 @@ public class Tuple<T> implements Collection<T>{
 	@Override
 	@Deprecated
 	public boolean add(T e) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Tuple is immutable. Use addAll() instead." );
 		//return items.add(e);
 	}
 
 	@Override
 	@Deprecated
 	public boolean remove(Object o) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Tuple is immutable. Use addAll() instead.");
 		//return items.remove(o);
 	}
 

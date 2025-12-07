@@ -1,11 +1,18 @@
 package mylib.util.graph;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.util.Nameable;
 
+import java.io.Serial;
+
+@Getter
+@Setter
 public class Edge implements Nameable, Comparable<Edge>{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 8240888198950683767L;
 	
 	private String name;
@@ -34,8 +41,8 @@ public class Edge implements Nameable, Comparable<Edge>{
 		this.isBackEdge = false;
 		this.isSelfLoop = isSelfLoop;
 		if(name.indexOf(':') != -1) {
-			String tmp[] = name.split(":");
-			this.name = tmp[0];
+			String[] tmp = name.split(":");
+            this.name = tmp[0];
 			this.cost = Double.parseDouble(tmp[1]);
 		} else {
 			this.name = name;
@@ -47,56 +54,10 @@ public class Edge implements Nameable, Comparable<Edge>{
 		this(name, false);
 	}
 
-	public boolean isExplored() {
-		return isExplored;
-	}
-
-	public void setExplored(boolean isExplored) {
-		this.isExplored = isExplored;
-	}
-
-	public boolean isDiscovery() {
-		return isDiscovery;
-	}
-
-	public void setDiscovery(boolean isDiscovery) {
-		this.isDiscovery = isDiscovery;
-	}
-
-	public boolean isBackEdge() {
-		return isBackEdge;
-	}
-
-	public void setBackEdge(boolean isBackEdge) {
-		this.isBackEdge = isBackEdge;
-	}
-	
 	public void reset() {
 		this.isExplored = false;
 		this.isDiscovery = false;
 		this.isBackEdge = false;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
-	public boolean isSelfLoop() {
-		return isSelfLoop;
 	}
 
 	@Override
@@ -126,7 +87,7 @@ public class Edge implements Nameable, Comparable<Edge>{
 
 	@Override
 	public int compareTo(Edge o) {
-		return ((Double)cost).compareTo(o.cost);
+		return Double.compare(cost, o.cost);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package mylib.util.list;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -8,6 +9,7 @@ public class ReverseArrayList<T> extends ArrayListIndexConvertor<T> {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 6758130848640775718L;
 
 	public ReverseArrayList() {

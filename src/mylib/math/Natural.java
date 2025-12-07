@@ -42,7 +42,7 @@ public final class Natural extends Number2 {
 	}
 
 	@Override
-	public Natural substract(Number2 o) {
+	public Natural subtract(Number2 o) {
 		return new Natural(this.value-o.intValue());
 	}
 

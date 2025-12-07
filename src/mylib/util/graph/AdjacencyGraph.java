@@ -1,5 +1,6 @@
 package mylib.util.graph;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 7418938933885661991L;
 
 	public AdjacencyGraph() {
@@ -72,9 +74,7 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	public void reset() {
 		this.forEach((v, e)->{
 			v.reset();
-			e.forEach(ee -> {
-				ee.reset();
-			});
+			e.forEach(Edge::reset);
 		});
 	}
 	
@@ -127,9 +127,7 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	
 	@Override
 	public void putAll(Map<? extends V, ? extends Set<E>> m) {
-		m.forEach((v, e) -> {
-			this.putVertex(v, e);
-		});
+		m.forEach(this::putVertex);
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package mylib.util;
 
+import java.io.Serial;
 import java.util.HashMap;
 
 public class Json extends HashMap<String, Object> {
@@ -7,22 +8,23 @@ public class Json extends HashMap<String, Object> {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1856733155231772823L;
 
 	@Override
 	public String toString() {
-		String str = "{\n";
+		StringBuilder str = new StringBuilder("{\n");
 		for(Entry<String, Object> entry: this.entrySet()){
-			String v;// = entry.getValue().toString();
+			String v;
 			if(entry.getValue() instanceof String) {
-				v = "\""+entry.getValue().toString()+"\"";
+				v = "\""+entry.getValue()+"\"";
 			} else {
 				v = entry.getValue().toString();
 			}
-			str += "\t\""+entry.getKey() + "\": " + v + ",\n";
+			str.append("\t\"").append(entry.getKey()).append("\": ").append(v).append(",\n");
 		}
-		str += "}";
-		return str;
+		str.append("}");
+		return str.toString();
 	}
 
 }

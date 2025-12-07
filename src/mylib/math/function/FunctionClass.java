@@ -1,7 +1,11 @@
 package mylib.math.function;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.Number2;
 
+@Setter
+@Getter
 public abstract class FunctionClass implements Function{
 	protected double amplitude;
 	protected double adder;
@@ -29,31 +33,7 @@ public abstract class FunctionClass implements Function{
 		this(1.0d, 0.0d);
 	}
 
-	public double getAmplitude() {
-		return amplitude;
-	}
-
-	public void setAmplitude(double amplitude) {
-		this.amplitude = amplitude;
-	}
-
-	public double getAdder() {
-		return adder;
-	}
-
-	public void setAdder(double adder) {
-		this.adder = adder;
-	}
-
-	public Domain getDomain() {
-		return domain;
-	}
-
-	public void setDomain(Domain domain) {
-		this.domain = domain;
-	}
-	
-	public FunctionClass add(FunctionClass f) {
+    public FunctionClass add(FunctionClass f) {
 		Function r = x -> this.apply(x) + f.apply(x); 
 		return (FunctionClass)r;
 	}

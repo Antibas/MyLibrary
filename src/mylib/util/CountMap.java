@@ -1,5 +1,6 @@
 package mylib.util;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ public class CountMap<T> extends HashMap<T, Integer>{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	public CountMap() {

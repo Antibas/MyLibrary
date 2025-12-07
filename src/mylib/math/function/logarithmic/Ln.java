@@ -18,6 +18,7 @@ public class Ln extends Log{
 	@Override
 	@Deprecated
 	public void setBase(double base) {
+		throw new UnsupportedOperationException("Cannot set base of Ln function");
 	}
 
 	@Override

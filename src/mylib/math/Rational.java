@@ -68,7 +68,7 @@ public class Rational extends Number2 {
 	}
 
 	@Override
-	public Rational substract(Number2 o) {
+	public Rational subtract(Number2 o) {
 		if(o instanceof Rational) {
 			Rational oRational = (Rational)o;
 			if(this.denominator == oRational.denominator)

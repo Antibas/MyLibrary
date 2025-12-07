@@ -1,7 +1,11 @@
 package mylib.math.vector;
 
-import mylib.util.pair.named.Pair;
+import lombok.Getter;
+import lombok.Setter;
+import mylib.util.pair.NamedPair;
 
+@Setter
+@Getter
 public class Vector2D {
 	protected double x1, y1;
 	protected double x2, y2;
@@ -13,59 +17,27 @@ public class Vector2D {
 		this.y2 = y2;
 	}
 	
-	public Vector2D(Pair<Double> pair1, Pair<Double> pair2) {
-		this(pair1.getFirst(), pair1.getSecond(), pair2.getFirst(), pair2.getSecond());
+	public Vector2D(NamedPair<Double> namedPair1, NamedPair<Double> namedPair2) {
+		this(namedPair1.getFirst(), namedPair1.getSecond(), namedPair2.getFirst(), namedPair2.getSecond());
 	}
 	
 	public Vector2D(double x2, double y2) {
 		this(0, 0, x2, y2);
 	}
 	
-	public Vector2D(Pair<Double> pair2) {
-		this(pair2.getFirst(), pair2.getSecond());
+	public Vector2D(NamedPair<Double> namedPair2) {
+		this(namedPair2.getFirst(), namedPair2.getSecond());
 	}
 	
 	public Vector2D(Vector2D vector) {
-		this(vector.x1, vector.x2, vector.y1, vector.y2);
+		this(vector.x1, vector.y1, vector.x2, vector.y2);
 	}
 	
 	public Vector2D() {
 		this(0,0);
 	}
 
-	public double getX1() {
-		return x1;
-	}
-
-	public void setX1(double x1) {
-		this.x1 = x1;
-	}
-
-	public double getY1() {
-		return y1;
-	}
-
-	public void setY1(double y1) {
-		this.y1 = y1;
-	}
-
-	public double getX2() {
-		return x2;
-	}
-
-	public void setX2(double x2) {
-		this.x2 = x2;
-	}
-
-	public double getY2() {
-		return y2;
-	}
-
-	public void setY2(double y2) {
-		this.y2 = y2;
-	}
-	
-	public double getX() {
+    public double getX() {
 		return x2-x1;
 	}
 
@@ -74,11 +46,11 @@ public class Vector2D {
 	}
 	
 	public Iterable<Double> getFirstPoint(){
-		return new Pair<>(x1, y1);
+		return new NamedPair<>(x1, y1);
 	}
 	
 	public Iterable<Double> getSecondPoint(){
-		return new Pair<>(x2, y2);
+		return new NamedPair<>(x2, y2);
 	}
 	
 	public double amplitude() {
@@ -97,7 +69,7 @@ public class Vector2D {
 		return new Vector2D(getX(), getY());
 	}
 	
-	public Vector2D getInversed() {
+	public Vector2D getInverse() {
 		return new Vector2D(x2, y2, x1, y1);
 	}
 	
@@ -132,7 +104,7 @@ public class Vector2D {
 	}
 	
 	public static Vector2D sub(Vector2D vector1, Vector2D vector2) {
-		return Vector2D.add(vector1, vector2.getInversed());
+		return Vector2D.add(vector1, vector2.getInverse());
 	}
 	
 	public static double dot(Vector2D vector1, Vector2D vector2) {
@@ -160,15 +132,10 @@ public class Vector2D {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(x1);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(x2);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y1);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y2);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + Double.hashCode(x1);
+        result = prime * result + Double.hashCode(x2);
+        result = prime * result + Double.hashCode(y1);
+        result = prime * result + Double.hashCode(y2);
 		return result;
 	}
 
@@ -187,10 +154,8 @@ public class Vector2D {
 			return false;
 		if (Double.doubleToLongBits(y1) != Double.doubleToLongBits(other.y1))
 			return false;
-		if (Double.doubleToLongBits(y2) != Double.doubleToLongBits(other.y2))
-			return false;
-		return true;
-	}
+        return Double.doubleToLongBits(y2) == Double.doubleToLongBits(other.y2);
+    }
 	
 	@Override
 	public String toString() {

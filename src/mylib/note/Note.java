@@ -1,14 +1,17 @@
 package mylib.note;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Note {
-	public final static double MAXVELOCITY = 1.2;
-	public final static int MAXOCTAVE = 10;
-	public final static double RIGHTBALANCE = 1.0;
-	public final static double LEFTBALANCE = -1.0;
+	public final static double MAX_VELOCITY = 1.2;
+	public final static int MAX_OCTAVE = 10;
+	public final static double RIGHT_BALANCE = 1.0;
+	public final static double LEFT_BALANCE = -1.0;
 	
-	private double startPoint;
-	private double duration;
-	private double velocity, balance;
+	private double startPoint, duration, velocity, balance;
 	private NoteKey key;
 	private int octave;
 	
@@ -25,51 +28,4 @@ public class Note {
 		this(startPoint, duration, key, octave, 1.0, 0.0);
 	}
 
-	public double getStartPoint() {
-		return startPoint;
-	}
-
-	public void setStartPoint(double startPoint) {
-		this.startPoint = startPoint;
-	}
-
-	public double getDuration() {
-		return duration;
-	}
-
-	public void setDuration(double duration) {
-		this.duration = duration;
-	}
-
-	public double getVelocity() {
-		return velocity;
-	}
-
-	public void setVelocity(double velocity) {
-		this.velocity = velocity;
-	}
-
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
-	public NoteKey getKey() {
-		return key;
-	}
-
-	public void setKey(NoteKey key) {
-		this.key = key;
-	}
-
-	public int getOctave() {
-		return octave;
-	}
-
-	public void setOctave(int octave) {
-		this.octave = octave;
-	}
 }

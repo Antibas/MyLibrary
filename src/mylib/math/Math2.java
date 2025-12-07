@@ -531,6 +531,9 @@ public final class Math2{
     	
     	return xx -> m*xx + b;
     }
-    
+
+    public static char numberToLetter(int n) {
+    	return (char)('A' + n - 1);
+    }
 }
 

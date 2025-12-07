@@ -1,15 +1,21 @@
 package mylib.math.function;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.Complex;
 import mylib.math.Math2;
 import mylib.math.Number2;
 
+@Getter
 public class Domain {
-	private double dx;
+	@Setter
+    private double dx;
 	private double start;
 	private double end;
-	private boolean closedStart;
-	private boolean closedEnd;
+	@Setter
+    private boolean closedStart;
+	@Setter
+    private boolean closedEnd;
 	private Domain next;
 	
 	public Domain(double start, double end, double dx, boolean closedStart, boolean closedEnd) {
@@ -64,12 +70,8 @@ public class Domain {
 	public Domain() {
 		this(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Number2.DX_DOUBLE, false, false);
 	}
-	
-	public double getStart() {
-		return start;
-	}
 
-	public void setStart(double start) {
+    public void setStart(double start) {
 		if(start >= end) {
 			throw new IllegalArgumentException();
 		}
@@ -79,46 +81,14 @@ public class Domain {
 		}
 	}
 
-	public double getEnd() {
-		return end;
-	}
-
-	public void setEnd(double end) {
+    public void setEnd(double end) {
 		if(start >= end || !Domain.checkDomains(this, next)){//(end >= next.start && (closedEnd || next.closedStart))) {
 			throw new IllegalArgumentException();
 		}
 		this.end = end;
 	}
 
-	public boolean isClosedStart() {
-		return closedStart;
-	}
-
-	public void setClosedStart(boolean closedStart) {
-		this.closedStart = closedStart;
-	}
-
-	public boolean isClosedEnd() {
-		return closedEnd;
-	}
-
-	public void setClosedEnd(boolean closedEnd) {
-		this.closedEnd = closedEnd;
-	}
-	
-	public double getDx() {
-		return dx;
-	}
-
-	public void setDx(double dx) {
-		this.dx = dx;
-	}
-
-	public Domain getNext() {
-		return next;
-	}
-
-	public boolean isInDomain(double x) {
+    public boolean isInDomain(double x) {
 		if(x < end && x > start) return true;
 		if(x == end) return closedEnd;
 		if(x == start) return closedStart;
@@ -202,14 +172,10 @@ public class Domain {
 		int result = 1;
 		result = prime * result + (closedEnd ? 1231 : 1237);
 		result = prime * result + (closedStart ? 1231 : 1237);
-		long temp;
-		temp = Double.doubleToLongBits(dx);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(end);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + Double.hashCode(dx);
+        result = prime * result + Double.hashCode(end);
 		result = prime * result + ((next == null) ? 0 : next.hashCode());
-		temp = Double.doubleToLongBits(start);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + Double.hashCode(start);
 		return result;
 	}
 

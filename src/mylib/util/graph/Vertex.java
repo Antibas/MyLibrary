@@ -1,16 +1,23 @@
 package mylib.util.graph;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.util.Nameable;
 
+import java.io.Serial;
+
+@Getter
+@Setter
 public class Vertex implements Nameable, Comparable<Vertex>{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private boolean isExplored;
+    private boolean isExplored;
 	private double cost;
 	
 	public Vertex(String name, double cost) {
@@ -22,7 +29,7 @@ public class Vertex implements Nameable, Comparable<Vertex>{
 	public Vertex(String name) {
 		this.isExplored = false;
 		if(name.indexOf(':') != -1) {
-			String tmp[] = name.split(":");
+			String[] tmp = name.split(":");
 			this.name = tmp[0];
 			this.cost = Double.parseDouble(tmp[1]);
 		} else {
@@ -31,34 +38,8 @@ public class Vertex implements Nameable, Comparable<Vertex>{
 		}
 	}
 
-	public boolean isExplored() {
-		return isExplored;
-	}
-
-	public void setExplored(boolean isExplored) {
-		this.isExplored = isExplored;
-	}
-	
 	public void reset() {
 		this.isExplored = false;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-	
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
 	}
 
 	@Override
@@ -87,6 +68,6 @@ public class Vertex implements Nameable, Comparable<Vertex>{
 
 	@Override
 	public int compareTo(Vertex o) {
-		return ((Double)cost).compareTo(o.cost);
+		return Double.compare(cost, o.cost);
 	}
 }

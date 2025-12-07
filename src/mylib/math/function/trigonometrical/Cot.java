@@ -7,10 +7,10 @@ import mylib.math.Math2;
 public class Cot extends Sin {
 	@Override
 	public Double apply(Double t) {
-		if(phaseModifier == RADIANS) {
-			return amplitude/Math.tan(frequency*t + phase)+adder;
-		}
-		return amplitude/Math.tan(frequency*t + Math2.PI*phase/180.0d)+adder;
+//		if(phaseModifier == RADIANS) {
+//			return amplitude/Math.tan(frequency*t + phase)+adder;
+//		}
+		return amplitude/Math.tan(frequency*t + this.getPhase())+adder;
 	}
 	
 	@Override

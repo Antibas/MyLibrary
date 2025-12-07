@@ -1,9 +1,17 @@
 package mylib.util.graph;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
+
+@Setter
+@Getter
 public class DirectedEdge extends Edge {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -2568313332093812420L;
 	
 	private Direction direction;
@@ -21,15 +29,7 @@ public class DirectedEdge extends Edge {
 		this(name, 0, Direction.TO);
 	}
 
-	public Direction getDirection() {
-		return direction;
-	}
-
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return super.toString() + ": " + direction.toString().toLowerCase();
 	}

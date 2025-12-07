@@ -10,7 +10,7 @@ package mylib.util;
  * @author User
  */
 public final class Sorts {
-    public static <T extends Comparable<T>> int partition(T arr[], int left, int right){
+    public static <T extends Comparable<T>> int partition(T[] arr, int left, int right){
         int i = left, j = right;
         T tmp;
         T pivot = arr[(left + right) / 2];
@@ -30,23 +30,22 @@ public final class Sorts {
         return i;
     }
     
-    public static int[][] partition(int arr[]){
-        int a[] = new int[(arr.length + 1)/2];
-        int b[] = new int[arr.length - a.length];
+    public static int[][] partition(int[] arr){
+        int[] a = new int[(arr.length + 1)/2];
+        int[] b = new int[arr.length - a.length];
         System.arraycopy(arr, 0, a, 0, a.length);
         System.arraycopy(arr, a.length, b, 0, b.length);
-        int aa[][] = {a, b};
-        return aa;
+        return new int[][]{a, b};
     }
     
-    public static int[] merge(int a[], int b[]){
-        int arr[] = new int[a.length + b.length];
+    public static int[] merge(int[] a, int[] b){
+        int[] arr = new int[a.length + b.length];
         System.arraycopy(a, 0, arr, 0, arr.length-b.length);
         System.arraycopy(b, 0, arr, a.length, arr.length-a.length);
         return arr;
     }
 
-    public static <T extends Comparable<T>> void quickSort(T arr[], int left, int right) {
+    public static <T extends Comparable<T>> void quickSort(T[] arr, int left, int right) {
           int index = partition(arr, left, right);
 
           if (left < index - 1)
@@ -55,11 +54,11 @@ public final class Sorts {
                 quickSort(arr, index, right);
     }
     
-    public static <T extends Comparable<T>> void quickSort(T arr[]) {
+    public static <T extends Comparable<T>> void quickSort(T[] arr) {
           quickSort(arr, 0, arr.length-1);
     }
     
-    public static <T extends Comparable<T>> void selectionSort(T arr[]){  
+    public static <T extends Comparable<T>> void selectionSort(T[] arr){
         for (int i = 0; i < arr.length - 1; i++)  
         {  
             int index = i;  
@@ -74,13 +73,13 @@ public final class Sorts {
         }  
     }
     
-    public static void merge(int arr[], int l, int m, int r) { 
+    public static void merge(int[] arr, int l, int m, int r) {
 	    int i, j, k; 
 	    int n1 = m - l + 1; 
 	    int n2 =  r - m; 
 	  
 	    /* create temp arrays */
-	    int L[] = new int[n1], R[] = new int[n2]; 
+	    int[] L = new int[n1], R = new int[n2];
 	  
 	    /* Copy data to temp arrays L[] and R[] */
 	    for (i = 0; i < n1; i++) 
@@ -128,7 +127,7 @@ public final class Sorts {
   
 	/* l is for left index and r is right index of the 
 	   sub-array of arr to be sorted */
-	public static void mergeSort(int arr[], int l, int r) 
+	public static void mergeSort(int[] arr, int l, int r)
 	{ 
 	    if (l < r) 
 	    { 

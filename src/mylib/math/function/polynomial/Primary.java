@@ -27,7 +27,6 @@ public class Primary extends Polynomial{
     
     @Override
     public Complex[] solveForZero(){
-    	Complex[] s = {new Complex(-getMultiple(0) / getMultiple(1))};
-        return s;
+        return new Complex[]{new Complex(-getMultiple(0) / getMultiple(1))};
     }
 }

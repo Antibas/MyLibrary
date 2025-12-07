@@ -13,6 +13,6 @@ import java.io.Serializable;
  * @author Antiv
  */
 public interface Nameable extends Serializable{
-    public void setName(String name);
-	public String getName();
+    void setName(String name);
+	String getName();
 }

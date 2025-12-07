@@ -18,6 +18,7 @@ public class Euler extends Exp {
 	@Override
 	@Deprecated
 	public void setBase(double base) {
+		throw new UnsupportedOperationException("Cannot set base of Euler function");
 	}
 	
 }

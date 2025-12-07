@@ -3,8 +3,11 @@ package mylib.math.vector;
 import java.util.ArrayList;
 import java.util.List;
 
-import mylib.util.pair.named.Pair;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class Vector3D extends Vector2D {
 	protected double z1;
 	protected double z2;
@@ -40,23 +43,10 @@ public class Vector3D extends Vector2D {
 	}
 	
 	public Vector3D(Vector2D vector) {
-		super(vector);
+		this(vector, 0, 0);
 	}
-	
-	public double getZ1() {
-		return z1;
-	}
-	public void setZ1(double z1) {
-		this.z1 = z1;
-	}
-	public double getZ2() {
-		return z2;
-	}
-	public void setZ2(double z2) {
-		this.z2 = z2;
-	}
-	
-	public double getZ() {
+
+    public double getZ() {
 		return z2-z1;
 	}
 	
@@ -91,8 +81,8 @@ public class Vector3D extends Vector2D {
 		return new Vector3D(super.getCentered(), z2-z1);
 	}
 	@Override
-	public Vector3D getInversed() {
-		return new Vector3D(super.getInversed(), z2, z1);
+	public Vector3D getInverse() {
+		return new Vector3D(super.getInverse(), z2, z1);
 	}
 	@Override
 	public Vector3D getNormalized() {
@@ -102,11 +92,8 @@ public class Vector3D extends Vector2D {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(z1);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(z2);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + Double.hashCode(z1);
+        result = prime * result + Double.hashCode(z2);
 		return result;
 	}
 	

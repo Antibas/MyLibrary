@@ -5,9 +5,12 @@
  */
 package mylib.util.list;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Iterator;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.Math2;
 import mylib.util.ArrayUtils;
 import mylib.util.Methods;
@@ -16,28 +19,45 @@ import mylib.util.Methods;
  *
  * @author User
  */
+@Getter
+@Setter
 public class RandomArrayList<E> extends ArrayListIndexConvertor<E> {
     
     /**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1239168756052538810L;
+
+	private long seed;
 
 	public RandomArrayList(){
         super();
     }
-    
-    public RandomArrayList(Collection<? extends E> c) {
+
+	public RandomArrayList(long seed) {
+		super();
+		this.seed = seed;
+	}
+
+	public RandomArrayList(long seed, Collection<? extends E> c) {
+		super(c);
+		this.seed = seed;
+	}
+
+
+	public RandomArrayList(Collection<? extends E> c) {
 		super(c);
 	}
 
-	public RandomArrayList(int initialCapacity) {
+	public RandomArrayList(long seed, int initialCapacity) {
 		super(initialCapacity);
+		this.seed = seed;
 	}
 
 	@Override
 	public int indexConvert(int index) {
-		return Math2.RNG(0, this.size()-1, index*1000);
+		return Math2.RNG(0, this.size()-1, this.seed);
 	}
 
 	/*@Override

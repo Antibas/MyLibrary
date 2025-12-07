@@ -1,5 +1,6 @@
 package mylib.util.graph;
 
+import java.io.Serial;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ public class AdjacencyTree<V extends Vertex, E extends Edge> extends AdjacencyGr
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -82,11 +84,10 @@ public class AdjacencyTree<V extends Vertex, E extends Edge> extends AdjacencyGr
 
 	@Override
 	public Set<E> putVertex(V vertex, E... edges) {
-		Set<E> ret = super.putVertex(vertex, edges);
 		if(!validate()) {
 			throw new InvalidTreeException(vertex.toString());
 		}
-		return ret;
+		return super.putVertex(vertex, edges);
 	}
 
 	@Override

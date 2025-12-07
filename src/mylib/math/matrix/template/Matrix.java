@@ -9,25 +9,17 @@ package mylib.math.matrix.template;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.Random;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
-import javax.swing.JOptionPane;
 import mylib.io.FileIO;
 import mylib.math.CannotOperateException;
-import mylib.math.Math2;
 import mylib.math.Number2;
 import mylib.math.matrix.NoOrthogonialMatrixException;
 import mylib.math.matrix.EmptyMatrixException;
-import mylib.util.ArrayUtils;
-import mylib.util.Methods;
 
 
 /**
@@ -235,7 +227,7 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
         return this.elementAt(r, 0);
     }
     
-    public boolean isOrthogonial(){
+    public boolean isOrthogonal(){
         return rows == columns;
     }
     

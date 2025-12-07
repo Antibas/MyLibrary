@@ -1,7 +1,11 @@
 package mylib.math.function.exponential;
 
+import lombok.Getter;
+import lombok.Setter;
 import mylib.math.function.FunctionClass;
 
+@Setter
+@Getter
 public class Exp extends FunctionClass {
 	protected double base;
 	
@@ -17,16 +21,8 @@ public class Exp extends FunctionClass {
 	public Exp(double base) {
 		this(base, 1.0d, 0.0d);
 	}
-	
-	public double getBase() {
-		return base;
-	}
 
-	public void setBase(double base) {
-		this.base = base;
-	}
-
-	@Override
+    @Override
 	public Double apply(Double t) {
 		return amplitude*Math.pow(base, t) + adder;
 	}
