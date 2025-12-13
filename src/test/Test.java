@@ -1,12 +1,15 @@
 package test;
 
 
-import mylib.math.Complex;
+import mylib.math.Math2;
 
 public class Test {
 	  public static void main(String[] args) {
-		  Complex c = new Complex(1,2);
-		  System.out.println(c);
+//		  Complex c = new Complex(1,2);
+//		  System.out.println(c);
+		  for(int i = 0; i < 100; i++) {
+			  System.out.println(Math2.recaman(i));
+		  }
 		  /*
 		  Graph<Vertex, Edge> G = new Graph<>();
 		  Vertex A = new Vertex("A");
