@@ -91,11 +91,11 @@ public abstract class StringIO {
     	list.sort(Entry.comparingByValue());
     	
     	AdjacencyGraph tree = new AdjacencyGraph();
-    	List<Vertex> vertices = new ArrayList<>();
-    	
-    	for(Entry<Character, Integer> entry: list) {
-    		vertices.add(new Vertex(entry.getKey()+"", entry.getValue()));
-    	}
+    	List<Vertex> vertices = list.stream().map(e -> new Vertex(e.getKey()+"", e.getValue())).toList();
+//
+//    	for(Entry<Character, Integer> entry: list) {
+//    		vertices.add(new Vertex(entry.getKey()+"", entry.getValue()));
+//    	}
     	//System.out.println(vertices);
     	
     	while(vertices.size() > 1) {

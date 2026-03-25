@@ -6,6 +6,7 @@
 package mylib.games.cards;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import mylib.math.Math2;
@@ -90,4 +91,9 @@ public class Deck<T extends Card> extends CardCollection<T> {
 			addAll(pack);
 		}
 	}
+
+    @SafeVarargs
+    public static <T extends Card> Deck<T> of(T... cards) {
+        return new Deck<>(List.of(cards));
+    }
 }

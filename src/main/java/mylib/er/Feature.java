@@ -2,6 +2,7 @@ package mylib.er;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import java.util.function.Function;
 
@@ -42,14 +43,15 @@ public class Feature implements Nameable, Collection<Object>{
 		return this.values.elementAt(index);
 	}
 	
-	public Vector<Object> selection(Function<Object, Boolean> cond){
-		Vector<Object> selected = new Vector<>();
-		for(Object t: this.values) {
-			if(cond.apply(t)) {
-				selected.add(t);
-			}
-		}
-		return selected;
+	public List<Object> selection(Function<Object, Boolean> cond){
+//		Vector<Object> selected = new Vector<>();
+//		for(Object t: this.values) {
+//			if(cond.apply(t)) {
+//				selected.add(t);
+//			}
+//		}
+//		return selected;
+		return this.values.stream().filter(cond::apply).toList();
 	}
 	
 	
