@@ -3,7 +3,7 @@ package mylib.nn;
 import java.util.Collection;
 import java.util.Vector;
 
-import mylib.math.function.Function;
+import mylib.math.function.IMathFunction;
 
 public class Neuron {
 	private double bias;
@@ -30,7 +30,7 @@ public class Neuron {
         this(Math.random(), 1);
     }
 
-	public double getOutput(Vector<Double> inputs, Function activationFunction) {
+	public double getOutput(Vector<Double> inputs, IMathFunction activationFunction) {
 		if(inputs.size() != this.prevWeights.size())
 			throw new IllegalArgumentException();
 		

@@ -1,8 +1,8 @@
 package mylib.math.function.other;
 
-import mylib.math.function.FunctionClass;
+import mylib.math.function.MathFunction;
 
-public class D extends FunctionClass{
+public class D extends MathFunction {
 	protected double t0;
 
 	public D(double t0, double amplitude, double adder) {

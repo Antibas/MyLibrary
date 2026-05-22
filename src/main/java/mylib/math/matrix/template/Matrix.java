@@ -563,8 +563,41 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
         }
         return ret;
     }
+
+    public Matrix<T> adjacent(){
+        return adjacent(0, 0);
+    }
+
+    public Matrix<T> adjacent(int size){
+        return adjacent(0, 0, size);
+    }
+
+    public Matrix<T> adjacent(int i, int j){
+        return adjacent(i, j, 1);
+    }
+
+    public Matrix<T> adjacent(int i, int j, int size){
+        return adjacent(i, j, size, size);
+    }
     
-    
+    public Matrix<T> adjacent(int i, int j, int xsize, int ysize){
+        Matrix<T> ret;
+        if(isSingle()) return this;
+        ret = new Matrix<>(xsize, ysize);
+
+        int mi = 0, mj = 0;
+
+        int initialI = i-xsize/2, initialJ = j-ysize/2;
+        int finalI = i+xsize/2, finalJ = j+ysize/2;
+        for(int r = initialI; r < finalI; r++) {
+            for (int c = initialJ; c < finalJ; c++) {
+                ret.set(mi, ++mj, elements[r][c]);
+            }
+            mj=0;
+            mi++;
+        }
+        return ret;
+    }
     
     
 

@@ -1,14 +1,18 @@
 package mylib.math.function.trigonometrical;
 
-import mylib.math.function.FunctionClass;
+import lombok.Getter;
+import lombok.Setter;
+import mylib.math.function.MathFunction;
 
 import static mylib.math.function.trigonometrical.PhaseModifier.*;
 
 import mylib.math.Math2;
 
-public class Sin extends FunctionClass{
+public class Sin extends MathFunction {
     protected double amplitude;
     protected double adder;
+	@Getter
+	@Setter
     protected double frequency;
 	private double phase;
 	public static PhaseModifier phaseModifier = RADIANS;
@@ -33,14 +37,6 @@ public class Sin extends FunctionClass{
 	
 	public Sin() {
 		this(1.0d, 1.0d, 0.0d);
-	}
-
-	public double getFrequency() {
-		return frequency;
-	}
-
-	public void setFrequency(double frequency) {
-		this.frequency = frequency;
 	}
 
 	public double getPhase() {

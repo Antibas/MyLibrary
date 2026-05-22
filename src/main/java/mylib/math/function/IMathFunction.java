@@ -5,7 +5,9 @@
  */
 package mylib.math.function;
 
+import java.util.List;
 import java.util.Vector;
+import java.util.function.Function;
 
 import mylib.math.Complex;
 import mylib.math.Number2;
@@ -14,25 +16,25 @@ import mylib.math.Number2;
  *
  * @author User
  */
-public interface Function extends java.util.function.Function<Double, Double>{
+public interface IMathFunction extends Function<Double, Double> {
     
-    default Function derivative(){
+    default IMathFunction derivative(){
         return derivative(Double.MIN_NORMAL);
     }
     
-    default Function derivative(double h){
+    default IMathFunction derivative(double h){
         //ouble h = Double.MIN_NORMAL;
         return (x) -> (apply(x+h) - apply(x))/h;
     }
     
-    default Function derivative(int degree, double h){
+    default IMathFunction derivative(int degree, double h){
         if(degree <= 0) throw new IllegalArgumentException();
 
         if(degree == 1) return derivative(h);
         return derivative(degree-1, h).derivative(h);
     }
     
-    default Function derivative(int degree){
+    default IMathFunction derivative(int degree){
         return derivative(degree, Double.MIN_NORMAL);
     }
     
@@ -55,7 +57,7 @@ public interface Function extends java.util.function.Function<Double, Double>{
         return (a > b)? -S : S;
     }
     
-    default Function integral(double a, double b, double dx, Function f){
+    default IMathFunction integral(double a, double b, double dx, IMathFunction f){
         if(a > b){
             double tmp = a;
             a = b;
@@ -70,11 +72,11 @@ public interface Function extends java.util.function.Function<Double, Double>{
         return x -> 0.0d;
     }
     
-    default Function integral(double a, double b, Function f){
+    default IMathFunction integral(double a, double b, IMathFunction f){
         return integral(a, b, Number2.DX_DOUBLE, f);
     }
     
-    default Function integral(){
+    default IMathFunction integral(){
         return (x) -> integral(0, x);
     }
     
@@ -110,6 +112,18 @@ public interface Function extends java.util.function.Function<Double, Double>{
     	}
     	
         return (Complex[]) solutions.toArray();
+    }
+
+    default boolean isOneToOne(){
+        return isOneToOne(Number2.R_DOUBLE);
+    }
+
+    default boolean isOneToOne(Domain domain){
+        List<Double> points = new Vector<>();
+        for(double x = domain.getStart(); x <= domain.getEnd(); x += domain.getDx()) {
+            points.add(apply(x));
+        }
+        return points.stream().distinct().count() == 1;
     }
     
     /*default Series fourierSeries(double f0) {

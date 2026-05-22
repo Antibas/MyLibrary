@@ -2,6 +2,8 @@ package mylib;
 
 //import mylib.math.Math2;
 
+import mylib.math.matrix.template.Matrix;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -118,6 +120,5 @@ public class Main {
 		  System.out.println(Methods.min(ints));*/
         //String str = "BCCABBDDAECCBBAEDDCC";
         //System.out.println(StringIO.huffmanEncoding(str));
-
     }
 }

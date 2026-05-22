@@ -2,13 +2,13 @@ package mylib.nn;
 
 import java.util.Vector;
 
-import mylib.math.function.Function;
+import mylib.math.function.IMathFunction;
 
 public class NeuralNetwork {
 	private Layer[] layers;
-	private Function activationFunction;
+	private IMathFunction activationFunction;
 	
-	public NeuralNetwork(Function activationFunction, int... layerSizes) {
+	public NeuralNetwork(IMathFunction activationFunction, int... layerSizes) {
 		this.activationFunction = activationFunction;
 		this.layers = new Layer[layerSizes.length];
 		

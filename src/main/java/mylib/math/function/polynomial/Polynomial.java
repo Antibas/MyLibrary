@@ -8,14 +8,14 @@ package mylib.math.function.polynomial;
 import java.util.Arrays;
 import java.util.Vector;
 
-import mylib.math.function.FunctionClass;
+import mylib.math.function.MathFunction;
 import mylib.util.ArrayUtils;
 
 /**
  *
  * @author User
  */
-public class Polynomial extends FunctionClass{
+public class Polynomial extends MathFunction {
     protected double[] multiples;
     protected int power;
     
@@ -158,7 +158,7 @@ public class Polynomial extends FunctionClass{
     }
     
     @Override
-    public Polynomial add(FunctionClass f) {
+    public Polynomial add(MathFunction f) {
     	Polynomial p = (Polynomial)f;
     	Polynomial pmax = new Polynomial(power >= p.power? this: p);
     	Polynomial pmin = new Polynomial(power < p.power? this: p);

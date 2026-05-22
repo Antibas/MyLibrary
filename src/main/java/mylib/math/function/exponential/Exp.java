@@ -1,8 +1,8 @@
 package mylib.math.function.exponential;
 
-import mylib.math.function.FunctionClass;
+import mylib.math.function.MathFunction;
 
-public class Exp extends FunctionClass {
+public class Exp extends MathFunction {
 	protected double base;
 	
 	public Exp(double base, double amplitude, double adder) {

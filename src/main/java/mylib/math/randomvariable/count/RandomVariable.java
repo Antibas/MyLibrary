@@ -7,7 +7,7 @@ package mylib.math.randomvariable.count;
 
 import java.util.Map;
 
-import mylib.math.function.Function;
+import mylib.math.function.IMathFunction;
 
 /**
  *
@@ -19,16 +19,16 @@ public class RandomVariable extends mylib.math.randomvariable.RandomVariable<Dou
 	 */
 	private static final long serialVersionUID = -1764431765603471418L;
 	
-	private Function function;
+	private IMathFunction function;
 	
-	public RandomVariable(Function function) {
+	public RandomVariable(IMathFunction function) {
 		super();
 		this.function = function;
 	}
 
 	public RandomVariable(Map<? extends Double, ? extends Double> m) {
 		super(m);
-		this.function = (Function) m;
+		this.function = (IMathFunction) m;
 	}
 	
 	public double E() {
@@ -43,8 +43,8 @@ public class RandomVariable extends mylib.math.randomvariable.RandomVariable<Dou
 		return s;
 	}
 	
-	public Function M() {
-		return (s) -> (new Function() {
+	public IMathFunction M() {
+		return (s) -> (new IMathFunction() {
 			@Override
 			public Double apply(Double t) {
 				return Math.exp(s*t)*function.apply(t);

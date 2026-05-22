@@ -1,9 +1,9 @@
 package mylib.math.function.logarithmic;
 
 import mylib.math.Number2;
-import mylib.math.function.FunctionClass;
+import mylib.math.function.MathFunction;
 
-public class Log extends FunctionClass{
+public class Log extends MathFunction {
 	protected double base;
 	
 	public Log(double base, double amplitude, double adder) {

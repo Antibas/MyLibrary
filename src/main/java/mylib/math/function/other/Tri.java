@@ -1,8 +1,8 @@
 package mylib.math.function.other;
 
-import mylib.math.function.FunctionClass;
+import mylib.math.function.MathFunction;
 
-public class Tri extends FunctionClass {
+public class Tri extends MathFunction {
 	protected double T;
 
 	public Tri(double T, double amplitude, double adder) {

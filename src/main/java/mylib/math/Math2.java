@@ -15,8 +15,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import mylib.math.function.Series;
-import mylib.math.function.Function;
+import mylib.math.function.ISeries;
+import mylib.math.function.IMathFunction;
 import mylib.util.ArrayUtils;
 import mylib.util.pair.Pair;
 
@@ -436,11 +436,11 @@ public final class Math2{
         return result;
     }
     
-    public static boolean converges(int a, int b, Series s){
+    public static boolean converges(int a, int b, ISeries s){
         return s.sum(a, b) == Integer.MAX_VALUE;
     }
 
-    public static boolean diverges(int a, int b, Series s){
+    public static boolean diverges(int a, int b, ISeries s){
         return s.sum(a, b) != Integer.MAX_VALUE;
     }
     
@@ -505,11 +505,11 @@ public final class Math2{
     
     public static double std(double[] x) {
     	double avg = Math2.mean(x);
-    	Series s = n ->1d;
+    	ISeries s = n ->1d;
     	return 0;
     }
     
-    public static Function linearRegression(double[] x, double[] y) {
+    public static IMathFunction linearRegression(double[] x, double[] y) {
     	if(x.length != y.length) {
     		throw new IllegalArgumentException();
     	}
