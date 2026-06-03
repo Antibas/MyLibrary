@@ -23,8 +23,8 @@ public class Solitaire {
 			piles.elementAt(i).addCards(deck.getTopCards(i+1));
 		}
 		
-		cards = new CardCollection<StandardCard>(deck);
-		cardsOpen = new CardCollection<StandardCard>();
+		cards = new CardCollection<>(deck);
+		cardsOpen = new CardCollection<>();
 	}
 
 	@Override
